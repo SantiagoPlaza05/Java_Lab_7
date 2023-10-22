@@ -1,0 +1,76 @@
+@startuml
+
+title __LABORATORIO2COLECCIONES's Class Diagram__\n
+
+
+    class Client.ClientApp {
+    }
+    enum Shared.CommandType {
+    }
+    class Entidades.Movie {
+    }
+    class Client.FileReader {
+    }
+    class Client.CommandSender {
+    }
+    class Server.KeyboardHandler {
+    }
+    class Shared.DataBoxHandler {
+    }
+    class Server.ServerApp {
+    }
+    class Shared.TestBase {
+    }
+    class Server.DatabaseConnection {
+    }
+    enum Entidades.Color {
+    }
+    class Shared.Command {
+    }
+    class Entidades.Person {
+    }
+    class Server.EncriptionHelper {
+    }
+    class Server.CommunicationServer {
+    }
+    class Shared.SerializationHandler {
+    }
+    class Server.CsvReader {
+    }
+    class Client.CommandReader {
+    }
+    enum Entidades.MpaaRating {
+    }
+    class Client.CommunicationClient {
+    }
+    class Entidades.User {
+    }
+    class Shared.DataBox {
+    }
+    class Client.MovieReader {
+    }
+    class Shared.SizeMessage {
+    }
+    class Server.ProcessHandler {
+    }
+    class Entidades.Coordinates {
+    }
+    class Entidades.Location {
+    }
+
+
+    java.io.Serializable <|.. Entidades.Movie
+    Entidades.Comparable <|.. Entidades.Movie
+    Server.Runnable <|.. Server.KeyboardHandler
+    java.io.Serializable <|.. Shared.Command
+    java.io.Serializable <|.. Entidades.Person
+    Server.Runnable <|.. Server.CommunicationServer
+    Client.Runnable <|.. Client.CommandReader
+    java.io.Serializable <|.. Entidades.User
+    java.io.Serializable <|.. Shared.DataBox
+    java.io.Serializable <|.. Shared.SizeMessage
+    java.io.Serializable <|.. Entidades.Coordinates
+    java.io.Serializable <|.. Entidades.Location
+
+
+@enduml

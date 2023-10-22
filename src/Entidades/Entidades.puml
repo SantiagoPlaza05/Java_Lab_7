@@ -1,0 +1,125 @@
+@startuml
+
+title __ENTIDADES's Class Diagram__\n
+
+    enum Entidades.MpaaRating {
+    +  G
+    +  PG
+    +  PG_13
+    +  R
+    +  NC_17
+    }
+    class Entidades.Movie {
+    - Integer userId
+    - long id
+    - String name
+    - Coordinates coordinates
+    - Date creationDate
+    - long oscarsCount
+    - Integer budget
+    - int totalBoxOffice
+    - MpaaRating mpaaRating
+    - Person operator
+    + <<Create>> Movie(String,Coordinates,Date,long,Integer,int,MpaaRating,Person)
+    + <<Create>> Movie()
+    + <<Create>> Movie(Integer,long,String,Coordinates,Date,long,Integer,int,MpaaRating,Person)
+    + Integer getUserId()
+    + void setUserId(Integer)
+    + long getId()
+    + void setId(long)
+    + String getName()
+    + void setName(String)
+    + Coordinates getCoordinates()
+    + void setCoordinates(Coordinates)
+    + Date getCreationDate()
+    + void setCreationDate(Date)
+    + long getOscarsCount()
+    + void setOscarsCount(long)
+    + Integer getBudget()
+    + void setBudget(Integer)
+    + int getTotalBoxOffice()
+    + void setTotalBoxOffice(int)
+    + MpaaRating getMpaaRating()
+    + void setMpaaRating(MpaaRating)
+    + Person getOperator()
+    + void setOperator(Person)
+    + String toCsv()
+    + String toString()
+    + int compareTo(Movie)
+    + String toInsert()
+    }
+    class Entidades.User {
+    - int userId
+    - String name
+    - String password
+    + int getUserId()
+    + void setUserId(int)
+    + String getName()
+    + void setName(String)
+    + String getPassword()
+    + void setPassword(String)
+    }
+    enum Entidades.Color {
+    +  RED
+    +  YELLOW
+    +  ORANGE
+    +  BROWN
+    }
+    class Entidades.Person {
+    - String name
+    - Long height
+    - String passportID
+    - Color eyeColor
+    - Location location
+    + <<Create>> Person(String,Long,String,Color,Location)
+    + <<Create>> Person()
+    + String getName()
+    + void setName(String)
+    + Long getHeight()
+    + void setHeight(Long)
+    + String getPassportID()
+    + void setPassportID(String)
+    + Color getEyeColor()
+    + void setEyeColor(Color)
+    + Location getLocation()
+    + void setLocation(Location)
+    + String toCsv()
+    }
+    class Entidades.Coordinates {
+    - Double x
+    - float y
+    + <<Create>> Coordinates(Double,float)
+    + <<Create>> Coordinates()
+    + Double getX()
+    + void setX(Double)
+    + float getY()
+    + void setY(float)
+    + String toCsv()
+    }
+    class Entidades.Location {
+    - Long x
+    - float y
+    - Float z
+    - String name
+    + <<Create>> Location(Long,float,Float,String)
+    + <<Create>> Location()
+    + Long getX()
+    + void setX(Long)
+    + float getY()
+    + void setY(float)
+    + Float getZ()
+    + void setZ(Float)
+    + String getName()
+    + void setName(String)
+    + String toCsv()
+    }
+
+
+    java.io.Serializable <|.. Entidades.Movie
+    java.lang.Comparable <|.. Entidades.Movie
+    java.io.Serializable <|.. Entidades.User
+    java.io.Serializable <|.. Entidades.Person
+    java.io.Serializable <|.. Entidades.Coordinates
+    java.io.Serializable <|.. Entidades.Location
+
+@enduml

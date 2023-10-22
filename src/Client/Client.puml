@@ -1,0 +1,55 @@
+@startuml
+
+title __CLIENT's Class Diagram__\n
+
+    class Client.ClientApp {
+    - {static} User user
+    - {static} CommunicationClient communication
+    + {static} User getUser()
+    + {static} CommunicationClient getCommunication()
+    - {static} void setCommunication(CommunicationClient)
+    + {static} void main(String[])
+    - {static} Boolean initializeCommunication(String,Integer)
+    }
+    class Client.CommandReader {
+    + void readConsoleCommand()
+    ~ {static} boolean continuar(StringBuilder)
+    + void run()
+    }
+    class Client.FileReader {
+    + String read(String)
+    }
+    class Client.CommandSender {
+    + String sendCommand(Command)
+    }
+    class Client.CommunicationClient {
+    - Integer port
+    - DatagramSocket datagramSocket
+    - InetAddress serverAddress
+    + <<Create>> CommunicationClient(Integer,String)
+    + boolean send(byte[])
+    + String receive()
+    }
+    class Client.MovieReader {
+    + {static} Movie read()
+    - {static} MpaaRating getMpaaRating(Scanner)
+    + {static} Coordinates createCoordinates(Scanner)
+    + {static} Person createPerson(Scanner)
+    - {static} Location createLocation(Scanner)
+    - {static} Color createEye(Scanner)
+    + {static} Integer tryParseInt(String)
+    + {static} Long tryParseLong(String)
+    - {static} Float tryParseFloat(String)
+    + {static} Double tryParseDouble(String)
+    + {static} Long readLong(Scanner,String,boolean)
+    + {static} Double readDouble(Scanner,String,boolean)
+    + {static} String readString(Scanner,String,boolean)
+    + {static} Integer readInt(Scanner,String,boolean)
+    - {static} Float readFloat(Scanner,String,boolean)
+    }
+
+
+    java.lang.Runnable <|.. Client.CommandReader
+
+
+@enduml

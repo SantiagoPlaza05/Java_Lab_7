@@ -1,0 +1,84 @@
+@startuml
+
+title __SHARED's Class Diagram__\n
+
+    class Shared.TestBase {
+    + {static} void main(String[])
+    + {static} void ping()
+    }
+    class Shared.SerializationHandler {
+    + {static} int SIZE
+    + {static} int HEADER
+    + {static} byte[] serialize(Object)
+    + {static} Serializable deserialize(byte[])
+    + {static} int getRepetition(int)
+    }
+    class Shared.SizeMessage {
+    + int Size
+    }
+    enum Shared.CommandType {
+    +  HELP
+    +  INFO
+    +  SHOW
+    +  CLEAR
+    +  REMOVE_KEY
+    +  REPLACE_IF_GREATER
+    +  REPLACE_IF_LOWER
+    +  REMOVE_GREATER_KEY
+    +  COUNT_LESS_THAN_OSCARS_COUNT
+    +  PRINT_ASCENDING
+    +  INSERT
+    +  UPDATE
+    +  EXECUTE_SCRIPT
+    +  PRINT_FIELD_DESCENDING_OSCARS_COUNT
+    }
+    class Shared.Command {
+    - User user
+    - DataBox dataCommand
+    - CommandType commandType
+    + <<Create>> Command()
+    + User getUser()
+    + void setUser(User)
+    + DataBox getDataCommand()
+    + void setDataCommand(DataBox)
+    + CommandType getCommandType()
+    + void setCommandType(CommandType)
+    }
+    class Shared.DataBox {
+    ~ Movie movie
+    ~ String response
+    ~ String dataFile
+    ~ Long key
+    ~ long oscarsCount
+    + long getOscarsCount()
+    + void setOscarsCount(long)
+    + Long getKey()
+    + void setKey(Long)
+    + Movie getMovie()
+    + void setMovie(Movie)
+    + String getResponse()
+    + void setResponse(String)
+    + String getDataFile()
+    + void setDataFile(String)
+    }
+    class Shared.DataBoxHandler {
+    + {static} boolean getDataBox(String[],Command,StringBuilder,boolean)
+    - {static} DataBox readDataCommandInsert(String[],StringBuilder)
+    - {static} Movie readMovie()
+    - {static} DataBox readDataCommandUpdate(String[],StringBuilder)
+    - {static} DataBox readDataCommandRemoveKey(String[],StringBuilder)
+    - {static} DataBox readDataCommandReplace(String[],StringBuilder)
+    - {static} DataBox readDataCommandExecuteScript(String[],StringBuilder)
+    - {static} DataBox readDataCommandCountLessThanOscars(String[],StringBuilder)
+    }
+
+    Shared.Command .up.|> java.io.Serializable
+    Shared.Command o-- Shared.CommandType : commandType
+    Shared.Command o-- Shared.DataBox : dataCommand
+    Shared.CommandType .up.|> java.io.Serializable
+    Shared.DataBox .up.|> java.io.Serializable
+    Shared.DataBox o-- Entidades.Movie : movie
+    Shared.SizeMessage .up.|> java.io.Serializable
+
+
+@enduml

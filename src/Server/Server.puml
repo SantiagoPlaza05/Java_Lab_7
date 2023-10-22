@@ -1,0 +1,77 @@
+@startuml
+
+title __SERVER's Class Diagram__\n
+
+    class Server.ServerApp {
+    + {static} Hashtable<Long,Movie> movieHashtable
+    - {static} String fileName
+    - {static} String initialization
+    - {static} Boolean exit
+    - {static} User currentUser
+    + {static} Boolean getExit()
+    + {static} void setExit(Boolean)
+    + {static} String getFileName()
+    - {static} void setFileName(String)
+    + {static} String getInitialization()
+    + {static} void setInitialization(String)
+    + {static} void main(String[])
+    - {static} boolean createIfNotExists(String)
+    + {static} User getCurrentUser()
+    + {static} void setCurrentUser(User)
+    }
+    class Server.EncriptionHelper {
+    + byte[] encrypt(String)
+    }
+    class Server.CommunicationServer {
+    - DatagramSocket datagramSocket
+    + <<Create>> CommunicationServer(Integer)
+    + void listen()
+    - void AnswerToClient(InetAddress,int,String)
+    + void run()
+    }
+    class Server.CsvReader {
+    + Hashtable<Long,Movie> read(String)
+    - {static} MpaaRating getMpaaRating(String)
+    - {static} Color getEye(String)
+    }
+    class Server.DatabaseConnection {
+    ~ String user
+    ~ String password
+    ~ String url
+    + Hashtable<Long,Movie> getMovies()
+    + Integer IdUser(User)
+    + boolean IsValidUser(User)
+    + void CreateAdmin()
+    + Hashtable<Long,Movie> saveMovies(Hashtable<Long,Movie>,Integer)
+    }
+    class Server.ProcessHandler {
+    ~ Comparator<Movie> compareByOscars
+    + String processCommand(Command)
+    + void CreateAdmin()
+    + boolean isValidUser(Command)
+    + Integer getIdUserDb(Command)
+    - String executeScript(Command)
+    - String executeCommand(String,User)
+    - String getLine(StringBuilder)
+    + String save()
+    + String saveToFile()
+    - String help()
+    - String info()
+    - String show()
+    - String clear()
+    - String countLessThanOscarsCount(Command)
+    - String remove(Command)
+    - String replaceIfGreater(Command)
+    - String replaceIfLower(Command)
+    - String remove_greater_key(Command)
+    - String printAscending()
+    - String printFieldDescendingOscarsCount()
+    - String insert(Command)
+    - String update(Command)
+    - {static} Long getNewId()
+    }
+
+
+Server.KeyboardHandler .up.|> java.lang.Runnable
+
+@enduml
